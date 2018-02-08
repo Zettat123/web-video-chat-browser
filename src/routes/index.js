@@ -2,9 +2,9 @@ import React from 'react'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import { createBrowserHistory } from 'history'
-import MainPage from '../pages/MainPage'
-import AboutPage from '../pages/AboutPage'
-import NotFoundPage from '../pages/NotFoundPage'
+import MainPage from 'pages/MainPage'
+import AboutPage from 'pages/AboutPage'
+import NotFoundPage from 'pages/NotFoundPage'
 
 export const history = createBrowserHistory()
 
