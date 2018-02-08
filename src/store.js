@@ -4,7 +4,7 @@ import logger from 'redux-logger'
 import reduxPromiseMiddleware from 'redux-promise-middleware'
 import { fromJS } from 'immutable'
 import { routerMiddleware } from 'react-router-redux'
-import createReducer from './reducers'
+import createReducer from 'reducers/index'
 
 // To activate Redux DevTools Extension.
 // @see https://github.com/zalmoxisus/redux-devtools-extension#usage

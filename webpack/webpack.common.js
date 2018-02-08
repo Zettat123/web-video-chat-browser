@@ -2,8 +2,7 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const resolvePath = path.resolve.bind(null, __dirname)
-const context = resolvePath('../src')
+const context = path.resolve(__dirname, '../src')
 
 const isProduction = process.env.NODE_ENV === 'production'
 const eslintConfig = require('../.eslintrc.json')
@@ -14,6 +13,8 @@ const entry = {
 
 if (!isProduction) {
   entry.app.unshift('webpack-hot-middleware/client')
+  eslintConfig.rules['no-unused-vars'] = 1
+  eslintConfig.rules['no-console'] = 1
 }
 
 module.exports = {
@@ -33,12 +34,12 @@ module.exports = {
   output: {
     filename: '[name].[hash].bundle.js',
     chunkFilename: '[name].[chunkhash].chunk.js',
-    path: resolvePath('../dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
   resolve: {
     modules: [context, 'node_modules'],
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
     alias: {
       app: context,
       actions: 'app/actions',
@@ -46,6 +47,7 @@ module.exports = {
       pages: 'app/pages',
       selectors: 'app/selectors',
       styles: 'app/styles',
+      hocs: 'app/hocs',
     },
   },
   module: {
