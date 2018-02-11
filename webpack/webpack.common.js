@@ -48,6 +48,7 @@ module.exports = {
       selectors: 'app/selectors',
       styles: 'app/styles',
       hocs: 'app/hocs',
+      helpers: 'app/helpers',
     },
   },
   module: {

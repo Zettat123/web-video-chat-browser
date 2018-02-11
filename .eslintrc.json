@@ -24,6 +24,7 @@
         "components": []
       }
     ],
+    "jsx-a11y/media-has-caption": 0,
     "react/jsx-filename-extension": 0,
     "import/extensions": 0,
     "react/prop-types": 0,
