@@ -4,10 +4,13 @@
 import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import cx from 'classnames'
+import { Input, Button } from 'antd'
 import { ready } from 'actions/user'
 import WrappedPeer from 'helpers/PeerManager'
 import { selectUserId, selectIsReady } from 'selectors/user'
 import propsToImmutable from 'hocs/propsToImmutable'
+import styles from './VideoChat.scss'
 
 class VideoChat extends React.Component {
   constructor(props) {
@@ -44,28 +47,43 @@ class VideoChat extends React.Component {
 
   render() {
     const { remoteId } = this.state
-    const { isReady } = this.props
+    const { className, isReady } = this.props
 
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="Input another id"
-          value={remoteId}
-          onChange={e => this.setState({ remoteId: e.target.value })}
+      <div className={cx(className, styles.root)}>
+        <div className={styles.readyWrapper}>
+          <Input
+            className={styles.input}
+            disabled={isReady}
+            type="text"
+            placeholder="Input remote id"
+            value={remoteId}
+            onChange={e => this.setState({ remoteId: e.target.value })}
+          />
+          <Button
+            className={styles.button}
+            disabled={isReady}
+            onClick={() => this.createMyPeer()}
+          >
+            Ready
+          </Button>
+          <Button
+            className={styles.button}
+            type="primary"
+            disabled={!isReady}
+            onClick={() => {
+              this.startVideoChat()
+            }}
+          >
+            Start
+          </Button>
+        </div>
+        <video
+          className={styles.player}
+          autoPlay
+          controls
+          ref={player => (this.videoPlayer = player)}
         />
-        <button disabled={isReady} onClick={() => this.createMyPeer()}>
-          Ready
-        </button>
-        <button
-          disabled={!isReady}
-          onClick={() => {
-            this.startVideoChat()
-          }}
-        >
-          Start
-        </button>
-        <video autoPlay controls ref={player => (this.videoPlayer = player)} />
       </div>
     )
   }

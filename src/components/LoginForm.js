@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { login } from 'actions/user'
 import { selectUserId } from 'selectors/user'
 import propsToImmutable from 'hocs/propsToImmutable'
+import styles from './LoginForm.scss'
 
 class LoginForm extends React.Component {
   componentWillMount() {
@@ -27,8 +28,8 @@ class LoginForm extends React.Component {
     const { userId } = this.props
 
     return (
-      <div>
-        <div>{`Your id is ${userId}`}</div>
+      <div className={styles.root}>
+        Your id is <span className={styles.id}>{userId}</span>
       </div>
     )
   }
