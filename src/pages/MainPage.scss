@@ -1,4 +1,6 @@
-.text {
-  color: red;
-  font-size: 48px;
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
