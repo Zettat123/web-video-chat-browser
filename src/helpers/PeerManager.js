@@ -51,7 +51,7 @@ class WrappedPeer {
 
   /**
    * callRemotePeer must be called after getMedia() or the stream would be null
-   * @param  {string}   remoteId  Another peer's id
+   * @param  {string}   remoteId   Another peer's id
    * @param  {function} playStream Callback function.Its param is stream.
    */
   callRemotePeer(remoteId, playStream) {
@@ -59,10 +59,17 @@ class WrappedPeer {
     this.mediaConnection.on('stream', playStream)
   }
 
-  answerRemotePeer() {
+  /**
+   * answer remote peer
+   * @param  {function} playStream Callback function.Its param is stream.
+   */
+  answerRemotePeer(playStream) {
     return new Promise((resolve) => {
       this.peer.on('call', (mediaConnection) => {
         mediaConnection.answer(this.stream)
+        this.mediaConnection = mediaConnection
+        // errors will occur on Firefox if the listener be removed
+        this.mediaConnection.on('stream', playStream)
       })
       resolve()
     })
