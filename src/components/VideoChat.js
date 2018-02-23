@@ -19,11 +19,14 @@ class VideoChat extends React.Component {
     this.state = {
       peer: null,
       remoteId: '',
+      isStarted: false,
     }
   }
 
   playStream = (stream) => {
     this.videoPlayer.srcObject = stream
+    // if the playStream is be called, the start button should be disabled
+    this.setState({ isStarted: true })
   }
 
   createMyPeer = () => {
@@ -34,7 +37,7 @@ class VideoChat extends React.Component {
     this.setState({ peer }, () => {
       peer
         .getMedia()
-        .then(() => peer.answerRemotePeer())
+        .then(() => peer.answerRemotePeer(this.playStream))
         .then(() => ready())
     })
   }
@@ -46,7 +49,7 @@ class VideoChat extends React.Component {
   }
 
   render() {
-    const { remoteId } = this.state
+    const { remoteId, isStarted } = this.state
     const { className, isReady } = this.props
 
     return (
@@ -70,7 +73,7 @@ class VideoChat extends React.Component {
           <Button
             className={styles.button}
             type="primary"
-            disabled={!isReady}
+            disabled={!isReady || isStarted}
             onClick={() => {
               this.startVideoChat()
             }}
