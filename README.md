@@ -1,11 +1,7 @@
-# Web application template
+# web-video-chat-browser
 
-`React` + `Redux` + `Webpack`
+The app is based on
+1. [WebApplicationTemplate](https://github.com/Zettat123/WebApplicationTemplate)
+2. [PeerJS](https://github.com/peers/peerjs)
 
-## How to use
-
-1. clone this repo
-2. `npm install`
-    - *`Yarn` has been deprecated due to some bugs, so I use npm.*
-3. `npm start`
-4. Visit `localhost:3000` in browser
+Server side: https://github.com/Zettat123/web-video-chat-server
